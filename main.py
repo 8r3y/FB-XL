@@ -41,13 +41,12 @@ print sh.name, sh.nrows, sh.ncols
 insertStatement = cur.prep("insert into IMPORTSPEC (BAR, CL_ART, CL_NAME) values (?,?,?)")
 
 for row in range(sh.nrows):
-    this_row = []
+    inputRows = []
     for col in range(sh.ncols):
         val = sh.cell_value(row, col)
         if isinstance(val, unicode):
             val = val.encode('utf8');
-        this_row.append(val)
-    inputRows = this_row
+        inputRows.append(val)
     cur.execute(insertStatement, inputRows)
 
 con.commit()
